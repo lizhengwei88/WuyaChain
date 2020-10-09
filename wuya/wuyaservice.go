@@ -6,6 +6,7 @@ import (
 	"WuyaChain/node"
 	"WuyaChain/log"
 	"context"
+	"fmt"
 	"path/filepath"
 )
 
@@ -37,8 +38,10 @@ func NewWuyaService(ctx context.Context,conf *node.Config, log *log.WuyaLog)(*Wu
 func(w *WuyaService) initBlockChainDB(serviceContext *ServiceContext) (err error) {
 	w.chainDBPath=filepath.Join(serviceContext.DataDir,BlockChainDir)
     w.log.Info("NewWuyaService BlockChain datadir is %s",w.chainDBPath)
+	fmt.Println("log is 002")
     w.chainDB,err=leveldb.NewLevelDB(w.chainDBPath)
 	if err!=nil{
+		fmt.Println("log is 003")
      w.log.Error("NewWuyaService Create BlockChain datadir is %s",w.chainDBPath)
      return err
 	}
