@@ -1,11 +1,18 @@
 package node
 
 import (
+	"WuyaChain/log"
+	"WuyaChain/node"
+	"WuyaChain/wuya"
+	"context"
 	"fmt"
 	"github.com/spf13/cobra"
 )
 
-var wuyaNodeconfigFile string
+var (
+	wuyaNodeconfigFile string
+ startHeight int
+	)
 
 var startCmd=&cobra.Command{
 	Use: "start",
@@ -20,7 +27,23 @@ var startCmd=&cobra.Command{
 		fmt.Printf("failed to reading the config file:%s\n", err)
 		return
 	}
-	fmt.Println("nodeConfig:", nodeConfig)
+         // Create log
+        wlog:=log.GetLogger("wuya")
+		serviceContext := wuya.ServiceContext{
+			DataDir: nodeConfig.BasicConfig.DataDir,
+		}
+     ctx:=context.WithValue(context.Background(),"ServiceContext",serviceContext)
+     wuyaNode,err:=node.NewPToP(nodeConfig)
+		if err !=nil{
+			fmt.Printf("failed to reading the config file:%s\n", err)
+			return
+		}
+
+	 wuyaService,err:=wuya.NewWuyaService(ctx,nodeConfig,wlog)
+		if err!=nil{
+			fmt.Println(err.Error())
+			return
+		}
 	},
 }
 

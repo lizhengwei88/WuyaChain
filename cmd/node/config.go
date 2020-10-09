@@ -2,16 +2,18 @@ package node
 
 import (
 	"WuyaChain/cmd/util"
+	"WuyaChain/node"
 	"encoding/json"
 	"io/ioutil"
 )
 
-func LoadConfigFromFile(configFile string) (*util.Config,error)  {
+func LoadConfigFromFile(configFile string) (*node.Config, error) {
 	cmdConfig,err:= GetConfigFromFile(configFile)
 	if err!=nil{
 		return nil,err
 	}
-	return cmdConfig,err
+	config:=CopyConfig(cmdConfig)
+	return config,err
 }
 
 func GetConfigFromFile(filepath string)  (*util.Config,error)  {
@@ -22,4 +24,11 @@ func GetConfigFromFile(filepath string)  (*util.Config,error)  {
 	 }
 	 err=json.Unmarshal(buff,&config)
 	return &config,err
+}
+
+func CopyConfig(cmdConfig *util.Config) *node.Config  {
+	config:=&node.Config{
+		BasicConfig: cmdConfig.BasicConfig,
+	}
+	return config
 }
