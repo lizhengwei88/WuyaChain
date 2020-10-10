@@ -13,3 +13,8 @@ func BytesToHash(b []byte) Hash  {
   copy(h[:],b)
    return *h
 }
+
+// Bytes returns its actual bits
+func (a Hash) Bytes() []byte {
+	return a[:]
+}

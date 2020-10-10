@@ -29,26 +29,31 @@ var startCmd = &cobra.Command{
 		}
 		// Create log
 		wlog := log.GetLogger("wuya")
-		fmt.Println("log is success 001")
+
 		serviceContext := wuya.ServiceContext{
 			DataDir: nodeConfig.BasicConfig.DataDir,
 		}
 		ctx := context.WithValue(context.Background(), "ServiceContext", serviceContext)
-		fmt.Println("ctx is success 001")
+
 		wuyaNode, err := node.NewPToP(nodeConfig)
 		if err != nil {
 			fmt.Printf("failed to reading the config file:%s\n", err)
 			return
 		}
-		fmt.Println("NewPToP is success 001")
+
 		wuyaService, err := wuya.NewWuyaService(ctx, nodeConfig, wlog)
 		if err != nil {
-			fmt.Println("wuyaService:",err.Error())
+			fmt.Println("wuyaService:", err.Error())
 			return
 		}
 
-		fmt.Println("wuyaNode:",wuyaNode)
-		fmt.Println("wuyaService:",wuyaService)
+		fmt.Println("wuyaNode:", wuyaNode)
+		fmt.Println("wuyaService:", wuyaService)
+		err = wuyaNode.Start()
+		if err != nil {
+			fmt.Print("got error when start node:%s\n", err)
+			return
+		}
 	},
 }
 

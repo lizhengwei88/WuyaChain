@@ -45,7 +45,7 @@ func GetLogger(module string) *WuyaLog {
     	panic(fmt.Sprintf("failed to create log dir:%s",err.Error()))
 	}
     logFileName:=fmt.Sprintf("%s%s","%Y%m%d",logExtension)
-    fmt.Println("log is 004",logFileName)
+
     writer,err:=rotatelogs.New(
     	filepath.Join(logDir,logFileName),
     	rotatelogs.WithClock(rotatelogs.Local),
