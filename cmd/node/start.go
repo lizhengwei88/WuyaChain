@@ -27,6 +27,7 @@ var startCmd = &cobra.Command{
 			fmt.Printf("failed to reading the config file:%s\n", err)
 			return
 		}
+
 		// Create log
 		wlog := log.GetLogger("wuya")
 

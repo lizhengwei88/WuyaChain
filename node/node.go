@@ -52,6 +52,7 @@ func (n *Node) Start() error {
 	for _, service := range n.services {
 		protocols = append(protocols, service.ProtoCol()...)
 	}
+
 	p2pServer := p2p.NewServer(n.config.WuyaConfig.GenesisConfig, n.config.P2PConfig, protocols)
     err:=p2pServer.Start(n.config.BasicConfig.DataDir,n.config.WuyaConfig.GenesisConfig.ShardNumber)
 	if err!=nil{

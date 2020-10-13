@@ -18,6 +18,10 @@ type Config struct {
 	// NetworkID used to define net type, for example main net and test net.
 	NetworkID string `json:"networkID"`
 
+	// SubPrivateKey which will be make PrivateKey
+	SubPrivateKey string `json:"privateKey"`
+
+	// PrivateKey private key for p2p module, do not use it as any accounts
 	PrivateKey *ecdsa.PrivateKey `json:"-"`
 }
 
