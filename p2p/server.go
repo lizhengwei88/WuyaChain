@@ -7,6 +7,7 @@ import (
 	"WuyaChain/p2p/discovery"
 	"crypto/ecdsa"
 	"errors"
+	"fmt"
 	"math/big"
 	"net"
 )
@@ -62,6 +63,8 @@ func (srv *Server) Start(nodeDir string,shard uint) (err error)  {
 		return err
 	}
 	srv.SelfNode=discovery.NewNode(*address,addr.IP,addr.Port,shard)
-
+	fmt.Println("===============p2p server.go==================")
+	fmt.Println("srv.SelfNode:",srv.SelfNode.IP)
+	fmt.Println("=================================")
 	return nil
 }

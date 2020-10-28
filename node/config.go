@@ -1,6 +1,7 @@
 package node
 
 import (
+    "WuyaChain/common"
     "WuyaChain/core"
     "WuyaChain/p2p"
 )
@@ -12,6 +13,8 @@ type Config struct {
     P2PConfig p2p.Config
     // The WuyaConfig is the configuration to create the wuya service.
     WuyaConfig WuyaConfig
+    // metrics config info
+    //MetricsConfig *metrics.Config
 }
 
 type BasicConfig struct {
@@ -25,5 +28,6 @@ type BasicConfig struct {
 
 // Config is the wuya's configuration to create wuya service
 type WuyaConfig struct {
+    Coinbase common.Address
     GenesisConfig core.GenesisInfo
 }

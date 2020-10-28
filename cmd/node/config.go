@@ -4,7 +4,7 @@ import (
 	"WuyaChain/cmd/util"
 	"WuyaChain/node"
 	"encoding/json"
-	"github.com/seeleteam/go-seele/crypto"
+	"WuyaChain/crypto"
 	"io/ioutil"
 )
 
@@ -22,7 +22,7 @@ func LoadConfigFromFile(configFile string) (*node.Config, error) {
 		}
 		config.P2PConfig.PrivateKey = key
 	}
-
+    config.WuyaConfig.GenesisConfig=cmdConfig.GenesisConfig
 	return config, err
 }
 
@@ -40,6 +40,7 @@ func CopyConfig(cmdConfig *util.Config) *node.Config {
 	config := &node.Config{
 		BasicConfig: cmdConfig.BasicConfig,
 		P2PConfig:   cmdConfig.P2PConfig,
+		WuyaConfig: node.WuyaConfig{},
 	}
 	return config
 }

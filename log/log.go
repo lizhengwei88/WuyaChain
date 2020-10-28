@@ -28,6 +28,14 @@ func (l *WuyaLog) Error(format string,args ...interface{})  {
 	l.log.Error(format,args)
 }
 
+func (l *WuyaLog) Debug(format string, args ...interface{}) {
+	l.log.Debugf(format, args...)
+}
+
+func (l *WuyaLog) Warn(format string, args ...interface{}) {
+	l.log.Warnf(format, args...)
+}
+
 func GetLogger(module string) *WuyaLog {
     if logMap==nil{
     	logMap=make(map[string]*WuyaLog)
