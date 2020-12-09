@@ -6,10 +6,10 @@ import (
 )
 
 func HashBytes(data ...[]byte) common.Hash  {
- return common.BytesToHash(Keccak25(data...))
+ return common.BytesToHash(Keccak256(data...))
 }
 
-func Keccak25(data ...[]byte) []byte  {
+func Keccak256(data ...[]byte) []byte  {
     s:=NewKeccak256()
     for _,b:=range data{
      s.Write(b)

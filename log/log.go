@@ -71,3 +71,5 @@ func GetLogger(module string) *WuyaLog {
 	logMap[module]=curLog
     return curLog
 }
+
+

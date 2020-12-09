@@ -2,6 +2,7 @@ package node
 
 import (
 	"WuyaChain/cmd/util"
+	"WuyaChain/common"
 	"WuyaChain/node"
 	"encoding/json"
 	"WuyaChain/crypto"
@@ -15,6 +16,10 @@ func LoadConfigFromFile(configFile string) (*node.Config, error) {
 	}
 	config := CopyConfig(cmdConfig)
 
+	if len(config.BasicConfig.Coinbase) > 0 {
+		config.WuyaConfig.Coinbase = common.HexMustToAddres(config.BasicConfig.Coinbase)
+	}
+
 	if cmdConfig.P2PConfig.PrivateKey == nil {
 		key, err := crypto.LoadECDSAFromString(cmdConfig.P2PConfig.SubPrivateKey)
 		if err != nil {
@@ -22,6 +27,7 @@ func LoadConfigFromFile(configFile string) (*node.Config, error) {
 		}
 		config.P2PConfig.PrivateKey = key
 	}
+
     config.WuyaConfig.GenesisConfig=cmdConfig.GenesisConfig
 	return config, err
 }

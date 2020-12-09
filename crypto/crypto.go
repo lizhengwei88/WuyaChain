@@ -57,3 +57,17 @@ func toECDSA(d []byte, strict bool) (*ecdsa.PrivateKey, error) {
 func S256() elliptic.Curve {
 	return secp256k1.S256()
 }
+
+// PubkeyToAddress add this method for istanbul BFT integration
+func PubkeyToAddress(key ecdsa.PublicKey) common.Address  {
+	return *GetAddress(&key)
+}
+
+// Keccak512 calculates and returns the Keccak512 hash of the input data.
+func Keccak512(data ...[]byte) []byte {
+	d := NewKeccak512()
+	for _, b := range data {
+		d.Write(b)
+	}
+	return d.Sum(nil)
+}

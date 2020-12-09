@@ -33,3 +33,10 @@ func Has0xPrefix(input string) bool {
 	return len(input) >= 2 && input[0] == '0' && input[1] == 'x'
 }
 
+// BytesToHex encodes b as a hex string with 0x prefix.
+func BytesToHex(b []byte) string {
+	enc := make([]byte, len(b)*2+2)
+	copy(enc, "0x")
+	hex.Encode(enc[2:], b)
+	return string(enc)
+}

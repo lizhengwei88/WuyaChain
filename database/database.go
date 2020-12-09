@@ -4,6 +4,7 @@ type Database interface {
 	Close()
 	Get(key []byte) ([]byte, error)
 	Put(key []byte, value []byte) error
+	Has(key []byte) (ret bool, err error)
 	Delete(key []byte) error
 	NewBatch() Batch
 }
